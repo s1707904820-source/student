@@ -22,9 +22,71 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 自定义CSS样式 - 添加动画效果
+# 自定义CSS样式 - 高大上外观
 st.markdown("""
 <style>
+    /* 全局背景 */
+    .stApp {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        background-attachment: fixed;
+    }
+    
+    /* 卡片容器背景 */
+    .main .block-container {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 20px;
+        padding: 2rem;
+    }
+    
+    /* 标题样式 */
+    h1, h2, h3 {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    h1 {
+        font-size: 3rem !important;
+        background: linear-gradient(90deg, #00d9ff, #00ff88, #00d9ff) !important;
+        background-size: 200% auto !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        animation: shine 3s linear infinite !important;
+    }
+    
+    @keyframes shine {
+        to { background-position: 200% center; }
+    }
+    
+    h2 {
+        border-bottom: 3px solid;
+        border-image: linear-gradient(90deg, #00d9ff, #00ff88) 1;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    
+    /* 指标卡片 */
+    .stMetric {
+        background: linear-gradient(135deg, rgba(0,217,255,0.1) 0%, rgba(0,255,136,0.1) 100%);
+        border: 1px solid rgba(0,217,255,0.3);
+        border-radius: 15px;
+        padding: 20px;
+        transition: all 0.3s ease !important;
+    }
+    .stMetric:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,217,255,0.3);
+        border-color: #00d9ff;
+    }
+    .stMetric label {
+        color: #aaa !important;
+    }
+    .stMetric [data-testid="stMetricValue"] {
+        color: #00d9ff !important;
+        font-size: 2rem !important;
+    }
+    
     /* 卡片悬停动画 */
     .stMetric {
         transition: all 0.3s ease !important;
@@ -44,36 +106,63 @@ st.markdown("""
     /* 按钮悬停动画 */
     .stButton>button {
         transition: all 0.3s ease !important;
+        background: linear-gradient(90deg, #00d9ff, #00ff88) !important;
+        border: none !important;
+        color: #1a1a2e !important;
+        font-weight: bold !important;
     }
     .stButton>button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 15px rgba(0,217,255,0.5) !important;
     }
     
     /* 信息卡片动画 */
     .stInfo, .stSuccess, .stWarning, .stError {
         transition: all 0.3s ease !important;
+        border-radius: 10px !important;
     }
-    .stInfo:hover, .stSuccess:hover, .stWarning:hover, .stError:hover {
-        transform: translateX(5px);
+    .stInfo { background: rgba(0,217,255,0.1) !important; border: 1px solid rgba(0,217,255,0.3) !important; }
+    .stSuccess { background: rgba(0,255,136,0.1) !important; border: 1px solid rgba(0,255,136,0.3) !important; }
+    .stWarning { background: rgba(255,170,0,0.1) !important; border: 1px solid rgba(255,170,0,0.3) !important; }
+    .stError { background: rgba(255,68,68,0.1) !important; border: 1px solid rgba(255,68,68,0.3) !important; }
+    
+    /* 侧边栏 */
+    .css-1d391kg {
+        background: rgba(0,0,0,0.3) !important;
     }
     
-    /* 侧边栏动画 */
-    .sidebar .sidebar-content {
-        animation: slideIn 0.5s ease;
+    /* 下拉框和输入框 */
+    .stSelectbox, .stMultiselect, .stTextInput, .stSlider {
+        background: rgba(255,255,255,0.05) !important;
+        border-radius: 10px !important;
     }
     
-    @keyframes slideIn {
-        from { transform: translateX(-100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
+    /* 分隔线 */
+    hr {
+        border-color: rgba(0,217,255,0.3) !important;
     }
     
-    /* 标题渐变动画 */
-    h1 {
-        background: linear-gradient(90deg, #3366CC, #FF6692);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    /* 数据框样式 */
+    .stDataFrame {
+        background: rgba(255,255,255,0.05) !important;
+        border-radius: 15px !important;
+    }
+    
+    /* 标签 */
+    .stBadge {
+        background: linear-gradient(90deg, #00d9ff, #00ff88) !important;
+        color: #1a1a2e !important;
+    }
+    
+    /* 进度条 */
+    .stProgress .stProgress-bar {
+        background: linear-gradient(90deg, #00d9ff, #00ff88) !important;
+    }
+    
+    /* 表格表头 */
+    thead tr th {
+        background: linear-gradient(90deg, #00d9ff, #00ff88) !important;
+        color: #1a1a2e !important;
     }
     
     /* 筛选框样式 */
@@ -187,7 +276,27 @@ def main():
 
 def show_home(data, analysis_results):
     """首页概览"""
-    st.title("📊 大学生行为分析与干预系统")
+    st.title("🎓 大学生行为分析与干预系统")
+    
+    # 炫酷的介绍区域
+    st.markdown("""
+    <div style='background: linear-gradient(135deg, rgba(0,217,255,0.15) 0%, rgba(0,255,136,0.15) 100%); 
+                padding: 30px; border-radius: 20px; border: 1px solid rgba(0,217,255,0.4); 
+                margin-bottom: 30px;'>
+        <h2 style='color: #00d9ff; text-align: center; margin-bottom: 15px;'>📊 数据驱动的大学生行为分析平台</h2>
+        <p style='color: #ccc; text-align: center; font-size: 1.1em;'>
+            基于多源数据融合与智能分析，输出8-10项学习行为分析成果<br>
+            构建学业风险预测模型(AUC≥80%)，实现个性化干预建议
+        </p>
+        <div style='display: flex; justify-content: center; gap: 30px; margin-top: 20px;'>
+            <span style='color: #00d9ff; font-size: 1.5em;'>🎯 精准画像</span>
+            <span style='color: #00ff88; font-size: 1.5em;'>📈 深度分析</span>
+            <span style='color: #ffaa00; font-size: 1.5em;'>⚠️ 风险预警</span>
+            <span style='color: #ff6692; font-size: 1.5em;'>📋 个性化报告</span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.markdown("---")
     
     # 关键指标卡片 - 带悬停动画
@@ -216,6 +325,29 @@ def show_home(data, analysis_results):
             with st.container():
                 st.metric("📖 平均图书馆访问", f"{avg_lib:.1f}次", help="人均图书馆访问次数")
     
+    # 新增统计卡片
+    st.markdown("<br>", unsafe_allow_html=True)
+    col5, col6, col7, col8 = st.columns(4)
+    
+    with col5:
+        if 'college' in data.columns:
+            college_count = data['college'].nunique()
+            st.metric("🏫 学院数量", int(college_count))
+    
+    with col6:
+        if 'major' in data.columns:
+            major_count = data['major'].nunique()
+            st.metric("📚 专业数量", int(major_count))
+    
+    with col7:
+        high_fail = (data['fail_count'] >= 2).sum()
+        st.metric("🔴 重修人数", int(high_fail), help="挂科2门及以上")
+    
+    with col8:
+        if 'total_online_duration' in data.columns:
+            avg_online = data['total_online_duration'].mean()
+            st.metric("💻 日均上网", f"{avg_online/60:.0f}分钟", help="学生日均上网时长")
+    
     st.markdown("---")
     
     # 数据概览
@@ -224,38 +356,90 @@ def show_home(data, analysis_results):
     col_left, col_right = st.columns(2)
     
     with col_left:
-        # 成绩分布 - 静态柱状图
+        # 成绩分布 - 带主题色
         fig = px.histogram(
             data, 
             x='avg_score',
             nbins=20,
-            title='成绩分布',
+            title='📊 成绩分布',
             labels={'avg_score': '平均成绩', 'count': '学生人数'},
-            color_discrete_sequence=['#3366CC']
+            color_discrete_sequence=['#00d9ff']
         )
-        fig.add_vline(x=avg_score, line_dash="dash", line_color="red", 
-                     annotation_text=f"均值: {avg_score:.1f}")
+        fig.add_vline(x=avg_score, line_dash="dash", line_color="#ff6692", 
+                     annotation_text=f"均值: {avg_score:.1f}", annotation_font_color="#ff6692")
         fig.update_traces(
             hovertemplate='成绩: %{x}<br>人数: %{y}<extra></extra>',
             marker_line_width=1,
             marker_line_color='white'
         )
-        fig.update_layout(yaxis_range=[0, None])
+        fig.update_layout(
+            plot_bgcolor='rgba(0,0,0,0)',
+            paper_bgcolor='rgba(0,0,0,0)',
+            font_color='white',
+            yaxis_range=[0, None]
+        )
         st.plotly_chart(fig, use_container_width=True)
     
     with col_right:
-        # 性别分布 - 静态饼图
+        # 性别分布 - 带主题色
         if 'gender' in data.columns:
             gender_dist = data['gender'].value_counts()
             fig = px.pie(
                 values=gender_dist.values,
                 names=gender_dist.index,
-                title='性别分布',
-                color_discrete_sequence=['#3366CC', '#FF6692']
+                title='👥 性别分布',
+                color_discrete_sequence=['#00d9ff', '#ff6692']
             )
             fig.update_traces(
                 hovertemplate='性别: %{label}<br>人数: %{value}<br>占比: %{percent}<extra></extra>',
                 pull=[0.02, 0.02]
+            )
+            fig.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)',
+                font_color='white'
+            )
+            st.plotly_chart(fig, use_container_width=True)
+    
+    # 学院分布
+    if 'college' in data.columns:
+        st.markdown("<br>", unsafe_allow_html=True)
+        col_dept1, col_dept2 = st.columns(2)
+        
+        with col_dept1:
+            college_dist = data['college'].value_counts().head(10)
+            fig = px.bar(
+                x=college_dist.values,
+                y=college_dist.index,
+                orientation='h',
+                title='🏫 各学院学生人数 Top10',
+                labels={'x': '学生人数', 'y': '学院'},
+                color_discrete_sequence=['#00ff88']
+            )
+            fig.update_layout(
+                plot_bgcolor='rgba(0,0,0,0)',
+                paper_bgcolor='rgba(0,0,0,0)',
+                font_color='white',
+                height=400
+            )
+            st.plotly_chart(fig, use_container_width=True)
+        
+        with col_dept2:
+            # 成绩排名前10的学院
+            college_avg = data.groupby('college')['avg_score'].mean().sort_values(ascending=False).head(10)
+            fig = px.bar(
+                x=college_avg.values,
+                y=college_avg.index,
+                orientation='h',
+                title='📈 各学院平均成绩 Top10',
+                labels={'x': '平均成绩', 'y': '学院'},
+                color_discrete_sequence=['#ffaa00']
+            )
+            fig.update_layout(
+                plot_bgcolor='rgba(0,0,0,0)',
+                paper_bgcolor='rgba(0,0,0,0)',
+                font_color='white',
+                height=400,
+                xaxis=dict(range=[0, 100])
             )
             st.plotly_chart(fig, use_container_width=True)
     
@@ -274,7 +458,14 @@ def show_home(data, analysis_results):
     for i, (title, desc) in enumerate(features):
         with cols[i]:
             with st.container():
-                st.info(f"**{title}**\n\n{desc}")
+                st.markdown(f"""
+                <div style='background: linear-gradient(135deg, rgba(0,217,255,0.1) 0%, rgba(0,255,136,0.1) 100%); 
+                            padding: 20px; border-radius: 15px; border: 1px solid rgba(0,217,255,0.3); 
+                            height: 100%;'>
+                    <h4 style='color: #00d9ff; margin: 0 0 10px 0;'>{title}</h4>
+                    <p style='color: #ccc; margin: 0; font-size: 0.9em;'>{desc}</p>
+                </div>
+                """, unsafe_allow_html=True)
 
 def show_profiles(data, analysis_results):
     """学生画像页面 - 添加筛选功能"""
@@ -609,13 +800,73 @@ def show_profiles(data, analysis_results):
 def show_analysis(data, analysis_results):
     """行为分析页面"""
     st.title("📈 行为分析成果")
+    st.markdown("""
+    <div style='background: linear-gradient(90deg, rgba(0,217,255,0.1), rgba(0,255,136,0.1)); 
+                padding: 20px; border-radius: 15px; border: 1px solid rgba(0,217,255,0.3);'>
+        <h3 style='color: #00d9ff; margin: 0;'>🎯 核心发现</h3>
+        <p style='color: #ccc; margin: 10px 0 0 0;'>
+            基于2500名学生的多维度数据分析，输出10项行为分析成果，揭示学习行为与学业成绩之间的内在关联
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown("---")
     
     if analysis_results is None:
         st.warning("⚠️ 分析结果未找到，请先运行行为分析模块")
         return
     
-    # 展示10个分析成果 - 添加动画效果
+    # 综合统计卡片
+    st.subheader("📊 行为分析统计概览")
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("📚 分析维度", "10+", help="涵盖学习行为、图书馆、考勤、任务等维度")
+    with col2:
+        st.metric("👥 群体聚类", "3-5类", help="基于行为特征的学生分群")
+    with col3:
+        st.metric("🔗 关联分析", "多维度", help="多变量相关性分析")
+    with col4:
+        st.metric("⚠️ 风险识别", "精准", help="学业风险因素挖掘")
+    
+    st.markdown("---")
+    
+    # 行为模式分布图
+    if 'behavior_patterns' in analysis_results and 'pattern_distribution' in analysis_results['behavior_patterns']:
+        st.subheader("🎯 学生行为模式分布")
+        patterns = analysis_results['behavior_patterns']['pattern_distribution']
+        pattern_df = pd.DataFrame(list(patterns.items()), columns=['行为模式', '人数'])
+        pattern_df = pattern_df.sort_values('人数', ascending=True)
+        
+        fig = px.bar(pattern_df, x='人数', y='行为模式', orientation='h',
+                    title='学生行为模式分布',
+                    color='人数', color_continuous_scale='Viridis')
+        fig.update_layout(
+            plot_bgcolor='rgba(0,0,0,0)',
+            paper_bgcolor='rgba(0,0,0,0)',
+            font_color='white'
+        )
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # 行为模式成绩对比
+        if 'pattern_avg_scores' in analysis_results['behavior_patterns']:
+            scores = analysis_results['behavior_patterns']['pattern_avg_scores']
+            score_df = pd.DataFrame(list(scores.items()), columns=['行为模式', '平均成绩'])
+            score_df = score_df.sort_values('平均成绩', ascending=False)
+            
+            fig2 = px.bar(score_df, x='行为模式', y='平均成绩',
+                         title='不同行为模式的平均成绩对比',
+                         color='平均成绩', color_continuous_scale='RdYlGn')
+            fig2.update_layout(
+                plot_bgcolor='rgba(0,0,0,0)',
+                paper_bgcolor='rgba(0,0,0,0)',
+                font_color='white',
+                yaxis=dict(range=[0, 100])
+            )
+            st.plotly_chart(fig2, use_container_width=True)
+    
+    st.markdown("---")
+    
+    # 展示10个分析成果
+    st.subheader("📋 详细分析成果")
     analysis_items = [
         ("📚 学习行为与成绩关联", 'study_behavior_score'),
         ("📖 图书馆行为与学业表现", 'library_performance'),
@@ -631,14 +882,19 @@ def show_analysis(data, analysis_results):
     
     for i, (title, key) in enumerate(analysis_items):
         if key in analysis_results:
-            with st.expander(title, expanded=(i==0)):
+            with st.expander(f"📌 {title}", expanded=False):
                 result = analysis_results[key]
                 
                 # 使用卡片样式展示
                 col1, col2 = st.columns([2, 1])
                 
                 with col1:
-                    st.info(f"**💡 洞察:** {result.get('insight', '无')}")
+                    st.markdown(f"""
+                    <div style='background: rgba(0,217,255,0.1); padding: 15px; border-radius: 10px; border-left: 4px solid #00d9ff;'>
+                        <h4 style='color: #00d9ff; margin: 0 0 10px 0;'>💡 洞察</h4>
+                        <p style='color: #fff; margin: 0;'>{result.get('insight', '暂无洞察')}</p>
+                    </div>
+                    """, unsafe_allow_html=True)
                     
                     # 显示详细信息
                     if 'correlation' in result:
@@ -658,6 +914,12 @@ def show_analysis(data, analysis_results):
                         st.write("**🎯 行为模式分布:**")
                         for pattern, count in result['pattern_distribution'].items():
                             st.write(f"  • {pattern}: **{count}人**")
+                    
+                    if 'risk_rate' in result:
+                        st.write(f"**⚠️ 风险率:** {result['risk_rate']:.1f}%")
+                    
+                    if 'risk_count' in result:
+                        st.write(f"**👥 风险人数:** {result['risk_count']}人")
 
 def show_risk_warning(data, risk_students_df):
     """风险预警页面 - 添加筛选功能"""
