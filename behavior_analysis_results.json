@@ -1,0 +1,331 @@
+{
+  "study_behavior_score": {
+    "title": "学习行为与成绩关联分析",
+    "correlation": 0.074457694779698,
+    "engagement_groups": {
+      "mean": {
+        "无投入": 86.44156038711715,
+        "低投入": 80.50731687698381,
+        "中等投入": 87.76477145463511,
+        "高投入": 88.35805507516496
+      },
+      "std": {
+        "无投入": 6.897688142420668,
+        "低投入": 10.414581870875363,
+        "中等投入": 5.35468411709135,
+        "高投入": 5.7894618256216095
+      },
+      "count": {
+        "无投入": 1936,
+        "低投入": 190,
+        "中等投入": 280,
+        "高投入": 94
+      }
+    },
+    "insight": "学习投入度与平均成绩相关系数为 0.074，相关性较弱"
+  },
+  "library_performance": {
+    "title": "图书馆行为与学业表现分析",
+    "visit_score_corr": 0.0933722989535386,
+    "days_score_corr": 0.09441608838716244,
+    "library_groups": {
+      "('avg_score', 'mean')": {
+        "从不": 85.87,
+        "偶尔": 82.09,
+        "一般": 87.17,
+        "经常": 87.01,
+        "频繁": 87.6
+      },
+      "('avg_score', 'std')": {
+        "从不": 7.56,
+        "偶尔": 6.37,
+        "一般": 5.61,
+        "经常": 5.9,
+        "频繁": 5.43
+      },
+      "('avg_gpa', 'mean')": {
+        "从不": 3.12,
+        "偶尔": 3.08,
+        "一般": 3.25,
+        "经常": 3.21,
+        "频繁": 3.28
+      },
+      "('student_id', 'count')": {
+        "从不": 2022,
+        "偶尔": 3,
+        "一般": 10,
+        "经常": 41,
+        "频繁": 390
+      }
+    },
+    "insight": "图书馆访问次数与成绩相关系数为 0.093，常去图书馆的学生平均成绩更高"
+  },
+  "attendance_performance": {
+    "title": "考勤与学业状态分析",
+    "correlation": -0.3527249769655311,
+    "attendance_groups": {
+      "('avg_score', 'mean')": {
+        "无记录": 86.73,
+        "较少": 76.75,
+        "一般": 77.35,
+        "良好": 70.4,
+        "优秀": 62.39
+      },
+      "('avg_score', 'std')": {
+        "无记录": 6.61,
+        "较少": 9.68,
+        "一般": 9.38,
+        "良好": 7.93,
+        "优秀": 7.99
+      },
+      "('fail_count', 'mean')": {
+        "无记录": 5.38,
+        "较少": 20.65,
+        "一般": 23.69,
+        "良好": 38.28,
+        "优秀": 56.7
+      },
+      "('student_id', 'count')": {
+        "无记录": 2401,
+        "较少": 31,
+        "一般": 29,
+        "良好": 29,
+        "优秀": 10
+      }
+    },
+    "insight": "考勤记录数与成绩相关系数为 -0.353，考勤良好的学生挂科率更低"
+  },
+  "task_score": {
+    "title": "课堂任务参与与成绩关联",
+    "correlation": NaN,
+    "task_groups": {
+      "mean": {
+        "不参与": 86.21081772017962
+      },
+      "count": {
+        "不参与": 2500
+      }
+    },
+    "insight": "任务参与度与成绩相关系数为 nan，积极参与任务的学生成绩更优"
+  },
+  "internet_learning": {
+    "title": "上网行为与学习效果分析",
+    "correlation": -0.013082225880784462,
+    "internet_groups": {
+      "('avg_score', 'mean')": {
+        "无": 96.08,
+        "低": 85.91,
+        "中": 83.15,
+        "高": 83.88,
+        "极高": 86.2
+      },
+      "('avg_score', 'std')": {
+        "无": 12.06,
+        "低": 13.17,
+        "中": 7.54,
+        "高": 7.56,
+        "极高": 6.82
+      },
+      "('avg_gpa', 'mean')": {
+        "无": 2.9,
+        "低": 2.8,
+        "中": 2.9,
+        "高": 3.03,
+        "极高": 3.17
+      },
+      "('student_id', 'count')": {
+        "无": 57,
+        "低": 9,
+        "中": 62,
+        "高": 131,
+        "极高": 2222
+      }
+    },
+    "insight": "上网时长与成绩相关系数为 -0.013，上网行为对成绩影响不显著"
+  },
+  "student_clustering": {
+    "title": "学生群体聚类分析",
+    "cluster_profiles": {
+      "avg_score": {
+        "0": 89.32,
+        "1": 77.15,
+        "2": 67.66,
+        "3": 88.73
+      },
+      "avg_gpa": {
+        "0": 3.35,
+        "1": 2.54,
+        "2": 2.09,
+        "3": 3.35
+      },
+      "library_visits": {
+        "0": 24.68,
+        "1": 22.31,
+        "2": 32.48,
+        "3": 717.38
+      },
+      "task_participation": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0
+      },
+      "total_attendance": {
+        "0": 0.29,
+        "1": 1.06,
+        "2": 83.21,
+        "3": 0.47
+      }
+    },
+    "cluster_sizes": {
+      "0": 1695,
+      "1": 554,
+      "3": 209,
+      "2": 42
+    },
+    "cluster_names": {
+      "0": "学霸型",
+      "1": "普通型",
+      "2": "普通型",
+      "3": "学霸型"
+    },
+    "insight": "学生可分为4类群体：学霸型, 普通型, 普通型, 学霸型"
+  },
+  "score_distribution": {
+    "title": "学业成绩分布特征",
+    "statistics": {
+      "mean": 86.21081772017962,
+      "median": 87.67684973302823,
+      "std": 7.242259529149549,
+      "min": 50.13157894736842,
+      "max": 143.75
+    },
+    "level_distribution": {
+      "良好": 1346,
+      "优秀": 758,
+      "中等": 282,
+      "及格": 80,
+      "不及格": 14
+    },
+    "fail_rate": 72.04,
+    "insight": "平均成绩 86.2 分，挂科率 72.0%，成绩呈正态分布"
+  },
+  "multi_behavior_correlation": {
+    "title": "多维度行为特征关联",
+    "correlation_matrix": {
+      "library_visits": {
+        "library_visits": 1.0,
+        "task_participation": NaN,
+        "total_attendance": -0.015864599516067723,
+        "total_online_duration": 0.039652885812557506,
+        "avg_score": 0.0933722989535384,
+        "avg_gpa": 0.13184245285679316
+      },
+      "task_participation": {
+        "library_visits": NaN,
+        "task_participation": NaN,
+        "total_attendance": NaN,
+        "total_online_duration": NaN,
+        "avg_score": NaN,
+        "avg_gpa": NaN
+      },
+      "total_attendance": {
+        "library_visits": -0.015864599516067723,
+        "task_participation": NaN,
+        "total_attendance": 1.0,
+        "total_online_duration": -0.01364517531236813,
+        "avg_score": -0.3527249769655329,
+        "avg_gpa": -0.31982385674534475
+      },
+      "total_online_duration": {
+        "library_visits": 0.039652885812557506,
+        "task_participation": NaN,
+        "total_attendance": -0.01364517531236813,
+        "total_online_duration": 1.0,
+        "avg_score": -0.01308222588078451,
+        "avg_gpa": 0.056553994747787814
+      },
+      "avg_score": {
+        "library_visits": 0.0933722989535384,
+        "task_participation": NaN,
+        "total_attendance": -0.3527249769655329,
+        "total_online_duration": -0.01308222588078451,
+        "avg_score": 1.0,
+        "avg_gpa": 0.8865799257322338
+      },
+      "avg_gpa": {
+        "library_visits": 0.13184245285679316,
+        "task_participation": NaN,
+        "total_attendance": -0.31982385674534475,
+        "total_online_duration": 0.056553994747787814,
+        "avg_score": 0.8865799257322338,
+        "avg_gpa": 1.0
+      }
+    },
+    "strong_correlations": [
+      {
+        "var1": "total_attendance",
+        "var2": "avg_score",
+        "correlation": -0.3527249769655329
+      },
+      {
+        "var1": "total_attendance",
+        "var2": "avg_gpa",
+        "correlation": -0.31982385674534475
+      },
+      {
+        "var1": "avg_score",
+        "var2": "avg_gpa",
+        "correlation": 0.8865799257322338
+      }
+    ],
+    "insight": "发现 3 组强相关行为特征，学习行为各维度间存在一定关联"
+  },
+  "risk_factors": {
+    "title": "学业风险因素分析",
+    "risk_rate": 56.84,
+    "risk_count": 1421,
+    "behavior_differences": {
+      "library_visits": {
+        "risk_mean": 71.76425052779733,
+        "normal_mean": 95.93790546802595,
+        "difference_pct": 25.1971885588905
+      },
+      "task_participation": {
+        "risk_mean": 0.0,
+        "normal_mean": 0.0,
+        "difference_pct": 0
+      },
+      "total_attendance": {
+        "risk_mean": 3.2287121745249823,
+        "normal_mean": 0.0871177015755329,
+        "difference_pct": -3606.1494003324
+      },
+      "total_online_duration": {
+        "risk_mean": 2990.034616467276,
+        "normal_mean": 2953.4936144578314,
+        "difference_pct": -1.2372128326457332
+      }
+    },
+    "insight": "学业风险学生占比 56.8%，风险学生在图书馆访问、任务参与等行为上显著低于正常学生"
+  },
+  "behavior_patterns": {
+    "title": "学生行为模式识别",
+    "pattern_distribution": {
+      "低参与模式": 2012,
+      "学霸模式": 356,
+      "自主学习模式": 115,
+      "学业困难模式": 13,
+      "常规模式": 4
+    },
+    "pattern_avg_scores": {
+      "低参与模式": 86.05885884239468,
+      "学业困难模式": 56.0989388811595,
+      "学霸模式": 90.02522177723316,
+      "常规模式": 85.43406088714671,
+      "自主学习模式": 80.49233832915048
+    },
+    "pattern_count": 5,
+    "insight": "识别出 5 种行为模式，其中 '低参与模式' 模式学生最多"
+  }
+}
