@@ -14,6 +14,43 @@ from plotly.subplots import make_subplots
 import warnings
 warnings.filterwarnings('ignore')
 
+# 全局图表主题 - 深色背景
+import plotly.io as pio
+pio.templates["dark_theme"] = go.layout.Template(
+    layout=go.Layout(
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(color='#ffffff', size=12),
+        title=dict(font=dict(color='#00d9ff', size=18)),
+        xaxis=dict(
+            gridcolor='rgba(255,255,255,0.1)',
+            linecolor='rgba(255,255,255,0.3)',
+            tickfont=dict(color='#ffffff'),
+            title=dict(font=dict(color='#ffffff', size=14)),
+            zerolinecolor='rgba(255,255,255,0.2)'
+        ),
+        yaxis=dict(
+            gridcolor='rgba(255,255,255,0.1)',
+            linecolor='rgba(255,255,255,0.3)',
+            tickfont=dict(color='#ffffff'),
+            title=dict(font=dict(color='#ffffff', size=14)),
+            zerolinecolor='rgba(255,255,255,0.2)'
+        ),
+        legend=dict(
+            font=dict(color='#ffffff', size=12),
+            bgcolor='rgba(0,0,0,0)',
+            title=dict(font=dict(color='#ffffff', size=14))
+        ),
+        coloraxis=dict(
+            colorbar=dict(
+                tickfont=dict(color='#ffffff'),
+                title=dict(font=dict(color='#ffffff'))
+            )
+        )
+    )
+)
+pio.templates.default = "dark_theme"
+
 # 设置页面配置
 st.set_page_config(
     page_title="大学生行为分析与干预系统",
@@ -43,6 +80,55 @@ st.markdown("""
         color: #ffffff !important;
         font-weight: 700 !important;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    /* 正文文字颜色 - 增强对比度 */
+    p, span, div {
+        color: #e0e0e0 !important;
+    }
+    
+    /* 标签页文字 */
+    .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
+        color: #ffffff !important;
+    }
+    
+    /* 展开面板 */
+    .streamlit-expanderHeader {
+        background: rgba(0,217,255,0.1) !important;
+        color: #ffffff !important;
+    }
+    
+    /* 表格文字 */
+    .dataframe {
+        color: #ffffff !important;
+    }
+    
+    /* 表格行 */
+    .dataframe tbody tr {
+        background: rgba(255,255,255,0.05) !important;
+        color: #ffffff !important;
+    }
+    
+    /* 表格表头 */
+    .dataframe thead th {
+        background: rgba(0,217,255,0.2) !important;
+        color: #00d9ff !important;
+    }
+    
+    /* 指标数值 */
+    [data-testid="stMetricValue"] {
+        color: #00d9ff !important;
+        text-shadow: 0 0 10px rgba(0,217,255,0.5) !important;
+    }
+    
+    /* 指标标签 */
+    [data-testid="stMetricLabel"] {
+        color: #b0b0b0 !important;
+    }
+    
+    /* 下拉框选项 */
+    [data-testid="stSelectbox"] label {
+        color: #ffffff !important;
     }
     
     h1 {
@@ -126,15 +212,157 @@ st.markdown("""
     .stWarning { background: rgba(255,170,0,0.1) !important; border: 1px solid rgba(255,170,0,0.3) !important; }
     .stError { background: rgba(255,68,68,0.1) !important; border: 1px solid rgba(255,68,68,0.3) !important; }
     
-    /* 侧边栏 */
-    .css-1d391kg {
-        background: rgba(0,0,0,0.3) !important;
+    /* 侧边栏 - 深色背景 */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #0f3460 0%, #16213e 100%) !important;
     }
     
-    /* 下拉框和输入框 */
+    /* 侧边栏文字 */
+    [data-testid="stSidebar"] h1, 
+    [data-testid="stSidebar"] h2, 
+    [data-testid="stSidebar"] h3,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span {
+        color: #ffffff !important;
+    }
+    
+    /* 导航菜单 */
+    [data-testid="stSidebar"] .stRadio label {
+        color: #ffffff !important;
+        font-size: 1.1em !important;
+    }
+    
+    /* 下拉框和输入框 - 深色背景 */
     .stSelectbox, .stMultiselect, .stTextInput, .stSlider {
-        background: rgba(255,255,255,0.05) !important;
+        background: rgba(0,0,0,0.3) !important;
         border-radius: 10px !important;
+        border: 1px solid rgba(0,217,255,0.3) !important;
+    }
+    
+    /* 下拉框内部文字 */
+    .stSelectbox div[data-baseweb="select"] {
+        color: #ffffff !important;
+    }
+    
+    /* 下拉框输入区域 */
+    .stSelectbox div[data-baseweb="select"] > div {
+        background: #1a1a2e !important;
+        color: #ffffff !important;
+    }
+    
+    /* 下拉框选中文字 */
+    .stSelectbox div[data-baseweb="select"] span {
+        color: #ffffff !important;
+    }
+    
+    /* 下拉选项菜单 - 弹出层 */
+    div[role="listbox"],
+    div[data-baseweb="menu"] {
+        background: #1a1a2e !important;
+        border: 1px solid rgba(0,217,255,0.3) !important;
+    }
+    
+    /* 下拉选项 */
+    div[role="option"],
+    div[data-baseweb="menu"] div {
+        color: #ffffff !important;
+        background: #1a1a2e !important;
+    }
+    
+    /* 下拉选项悬停 */
+    div[role="option"]:hover,
+    div[data-baseweb="menu"] div:hover {
+        background: rgba(0,217,255,0.3) !important;
+        color: #00d9ff !important;
+    }
+    
+    /* 下拉选项选中状态 */
+    div[role="option"][aria-selected="true"],
+    div[data-baseweb="menu"] [aria-selected="true"] {
+        background: rgba(0,217,255,0.2) !important;
+        color: #00d9ff !important;
+    }
+    
+    /* 下拉框主容器 */
+    [data-baseweb="select"] {
+        background: #1a1a2e !important;
+    }
+    
+    /* 下拉框内部所有div */
+    [data-baseweb="select"] div {
+        background: #1a1a2e !important;
+        color: #ffffff !important;
+    }
+    
+    /* 下拉框箭头 */
+    [data-baseweb="select"] svg {
+        color: #00d9ff !important;
+    }
+    
+    /* 下拉框输入框 */
+    [data-baseweb="select"] input {
+        color: #ffffff !important;
+        background: transparent !important;
+    }
+    
+    /* 文本输入框容器 */
+    .stTextInput > div {
+        background: #1a1a2e !important;
+        border: 1px solid rgba(0,217,255,0.3) !important;
+        border-radius: 10px !important;
+    }
+    
+    /* 输入框文字 */
+    .stTextInput input {
+        color: #ffffff !important;
+        background: transparent !important;
+    }
+    
+    /* 输入框占位符 */
+    .stTextInput input::placeholder {
+        color: #888888 !important;
+    }
+    
+    /* 文本输入框标签 */
+    .stTextInput label {
+        color: #00d9ff !important;
+    }
+    
+    /* 搜索框通用样式 */
+    .stTextInput input[type="text"] {
+        color: #ffffff !important;
+        background: #1a1a2e !important;
+    }
+    
+    /* 所有输入框 */
+    input[type="text"], 
+    input[type="search"] {
+        background: #1a1a2e !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(0,217,255,0.3) !important;
+    }
+    
+    /* 搜索图标颜色 */
+    .stTextInput svg {
+        color: #00d9ff !important;
+    }
+    
+    /* 筛选框标签 */
+    .stSelectbox label, .stMultiselect label, .stTextInput label {
+        color: #00d9ff !important;
+        font-weight: bold !important;
+    }
+    
+    /* 多选下拉框 */
+    .stMultiselect div[data-baseweb="select"] > div {
+        background: #1a1a2e !important;
+    }
+    
+    /* 多选标签 */
+    .stMultiselect span[data-baseweb="tag"] {
+        background: rgba(0,217,255,0.2) !important;
+        color: #00d9ff !important;
+        border: 1px solid rgba(0,217,255,0.3) !important;
     }
     
     /* 分隔线 */
@@ -366,7 +594,7 @@ def show_home(data, analysis_results):
             color_discrete_sequence=['#00d9ff']
         )
         fig.add_vline(x=avg_score, line_dash="dash", line_color="#ff6692", 
-                     annotation_text=f"均值: {avg_score:.1f}", annotation_font_color="#ff6692")
+                     annotation_text=f"均值: {avg_score:.1f}", annotation_font_color="#ffffff")
         fig.update_traces(
             hovertemplate='成绩: %{x}<br>人数: %{y}<extra></extra>',
             marker_line_width=1,
@@ -375,7 +603,10 @@ def show_home(data, analysis_results):
         fig.update_layout(
             plot_bgcolor='rgba(0,0,0,0)',
             paper_bgcolor='rgba(0,0,0,0)',
-            font_color='white',
+            font=dict(color='white', size=12),
+            title=dict(font=dict(color='#00d9ff', size=16)),
+            xaxis=dict(title_font=dict(color='white'), tickfont=dict(color='white')),
+            yaxis=dict(title_font=dict(color='white'), tickfont=dict(color='white')),
             yaxis_range=[0, None]
         )
         st.plotly_chart(fig, use_container_width=True)
@@ -392,11 +623,17 @@ def show_home(data, analysis_results):
             )
             fig.update_traces(
                 hovertemplate='性别: %{label}<br>人数: %{value}<br>占比: %{percent}<extra></extra>',
-                pull=[0.02, 0.02]
+                pull=[0.02, 0.02],
+                textfont=dict(color='white', size=14)
             )
             fig.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)',
-                font_color='white'
+                font_color='white',
+                title=dict(font=dict(color='#00d9ff', size=16)),
+                legend=dict(
+                    font=dict(color='white', size=14),
+                    bgcolor='rgba(0,0,0,0)'
+                )
             )
             st.plotly_chart(fig, use_container_width=True)
     
@@ -418,7 +655,10 @@ def show_home(data, analysis_results):
             fig.update_layout(
                 plot_bgcolor='rgba(0,0,0,0)',
                 paper_bgcolor='rgba(0,0,0,0)',
-                font_color='white',
+                font=dict(color='white', size=12),
+                title=dict(font=dict(color='#00d9ff', size=16)),
+                xaxis=dict(title_font=dict(color='white'), tickfont=dict(color='white')),
+                yaxis=dict(title_font=dict(color='white'), tickfont=dict(color='white')),
                 height=400
             )
             st.plotly_chart(fig, use_container_width=True)
@@ -437,9 +677,11 @@ def show_home(data, analysis_results):
             fig.update_layout(
                 plot_bgcolor='rgba(0,0,0,0)',
                 paper_bgcolor='rgba(0,0,0,0)',
-                font_color='white',
-                height=400,
-                xaxis=dict(range=[0, 100])
+                font=dict(color='white', size=12),
+                title=dict(font=dict(color='#00d9ff', size=16)),
+                xaxis=dict(title_font=dict(color='white'), tickfont=dict(color='white'), range=[0, 100]),
+                yaxis=dict(title_font=dict(color='white'), tickfont=dict(color='white')),
+                height=400
             )
             st.plotly_chart(fig, use_container_width=True)
     
@@ -576,13 +818,22 @@ def show_profiles(data, analysis_results):
             color='平均成绩',
             title='各学院学生分布与成绩',
             labels={'学生数': '学生人数', '平均成绩': '平均成绩'},
-            color_continuous_scale='Blues',
+            color_continuous_scale='Viridis',
             orientation='h'
         )
         fig.update_traces(
             hovertemplate='学院: %{y}<br>学生数: %{x}<br>平均成绩: %{marker.color:.1f}<extra></extra>',
             marker_line_width=1,
             marker_line_color='white'
+        )
+        fig.update_layout(
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            font_color='white',
+            title_font_color='#00d9ff',
+            xaxis=dict(gridcolor='rgba(255,255,255,0.1)', linecolor='rgba(255,255,255,0.3)'),
+            yaxis=dict(gridcolor='rgba(255,255,255,0.1)', linecolor='rgba(255,255,255,0.3)'),
+            coloraxis_colorbar=dict(tickfont=dict(color='white'), title_font=dict(color='white'))
         )
         st.plotly_chart(fig, use_container_width=True)
     
@@ -620,13 +871,20 @@ def show_profiles(data, analysis_results):
         theta=list(normalized_features.keys()),
         fill='toself',
         name='群体平均',
-        fillcolor='rgba(51, 102, 204, 0.3)',
-        line=dict(color='rgb(51, 102, 204)', width=2)
+        fillcolor='rgba(0, 217, 255, 0.3)',
+        line=dict(color='rgb(0, 217, 255)', width=2)
     ))
     fig.update_layout(
-        polar=dict(radialaxis=dict(visible=True, range=[0, 100])),
+        polar=dict(
+            radialaxis=dict(visible=True, range=[0, 100], gridcolor='rgba(255,255,255,0.2)', linecolor='rgba(255,255,255,0.3)'),
+            angularaxis=dict(gridcolor='rgba(255,255,255,0.2)', linecolor='rgba(255,255,255,0.3)'),
+            bgcolor='rgba(0,0,0,0.2)'
+        ),
         showlegend=True,
-        title='群体行为特征雷达图'
+        title='群体行为特征雷达图',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font_color='white',
+        title_font_color='#00d9ff'
     )
     st.plotly_chart(fig, use_container_width=True)
     
@@ -1018,7 +1276,13 @@ def show_risk_warning(data, risk_students_df):
             rotation=90
         ))
         
-        fig.update_layout(title='学业风险分布')
+        fig.update_layout(
+            title='学业风险分布',
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            font_color='white',
+            title_font_color='#00d9ff'
+        )
         st.plotly_chart(fig, use_container_width=True)
     
     with col_right:
@@ -1037,6 +1301,12 @@ def show_risk_warning(data, risk_students_df):
             )
             fig.update_traces(
                 hovertemplate='学院: %{y}<br>风险率: %{x:.1f}%<extra></extra>'
+            )
+            fig.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+                font_color='white',
+                title_font_color='#ff6692'
             )
             st.plotly_chart(fig, use_container_width=True)
     
