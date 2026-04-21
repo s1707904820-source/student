@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大学生行为分析与干预模型</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Microsoft YaHei', Arial, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .header h1 { color: #333; font-size: 2.5em; margin-bottom: 10px; }
+        .header p { color: #666; font-size: 1.2em; }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .nav a {
+            padding: 12px 25px;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .nav a:hover { background: #667eea; color: white; }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .card h2 { color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #667eea; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        .stat-box .number { font-size: 2.5em; font-weight: bold; }
+        .stat-box .label { font-size: 1.1em; opacity: 0.9; }
+        .chart-container { margin: 20px 0; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #667eea; color: white; }
+        tr:hover { background: #f5f5f5; }
+        .footer { text-align: center; color: white; margin-top: 30px; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 基于多源数据的大学生行为分析与干预模型设计</h1>
+            <p>数据驱动的学业风险预警与个性化干预系统</p>
+        </div>
+        
+        <div class="nav">
+            <a href="#overview">📊 数据概览</a>
+            <a href="#profiles">👥 学生画像</a>
+            <a href="#analysis">📈 行为分析</a>
+            <a href="#risk">⚠️ 风险预警</a>
+            <a href="#reports">📋 个性化报告</a>
+        </div>
+
+        <div class="card" id="overview">
+            <h2>📊 数据概览</h2>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="number">2500</div>
+                    <div class="label">学生总数</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">86.2</div>
+                    <div class="label">平均成绩</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">1421</div>
+                    <div class="label">风险学生</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">56.8%</div>
+                    <div class="label">风险率</div>
+                </div>
+            </div>
+            
+            <div class="grid-2">
+                <div class="chart-container">
+                    <div id="chart-score-dist"></div>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-gender"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="profiles">
+            <h2>👥 学生画像</h2>
+
+            <div class="chart-container">
+                <div id="chart-college"></div>
+            </div>
+            
+            <h3>学院统计数据</h3>
+            <table>
+                <tr><th>学院</th><th>学生数</th><th>平均成绩</th><th>平均绩点</th></tr>
+<tr><td>先进材料与纳米科技学院</td><td>36</td><td>85.7</td><td>3.13</td></tr>
+<tr><td>数学与统计学院</td><td>36</td><td>86.7</td><td>3.16</td></tr>
+<tr><td>生命科学技术学院</td><td>38</td><td>84.4</td><td>3.06</td></tr>
+<tr><td>外国语学院</td><td>42</td><td>85.5</td><td>3.37</td></tr>
+<tr><td>人文学院</td><td>42</td><td>88.6</td><td>3.32</td></tr>
+<tr><td>空间科学与技术学院</td><td>58</td><td>77.5</td><td>2.64</td></tr>
+<tr><td>物理学院</td><td>96</td><td>79.1</td><td>2.65</td></tr>
+<tr><td>经济与管理学院</td><td>116</td><td>87.2</td><td>3.24</td></tr>
+<tr><td>网络与信息安全学院</td><td>132</td><td>85.8</td><td>3.19</td></tr>
+<tr><td>人工智能学院</td><td>157</td><td>85.2</td><td>3.05</td></tr>
+<tr><td>光电工程学院</td><td>163</td><td>83.6</td><td>2.95</td></tr>
+<tr><td>微电子学院</td><td>211</td><td>87.0</td><td>3.24</td></tr>
+<tr><td>机电工程学院</td><td>238</td><td>86.6</td><td>3.15</td></tr>
+<tr><td>通信工程学院</td><td>337</td><td>89.6</td><td>3.35</td></tr>
+<tr><td>电子工程学院</td><td>354</td><td>86.4</td><td>3.14</td></tr>
+            </table>
+
+        </div>
+
+        <div class="card" id="risk">
+            <h2>⚠️ 学业风险预警</h2>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="number">1421</div>
+                    <div class="label">风险学生数</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">56.8%</div>
+                    <div class="label">风险率</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div id="chart-risk"></div>
+            </div>
+
+            <h3>高风险学生列表 (前30名)</h3>
+            <table>
+                <tr><th>学号</th><th>平均成绩</th><th>挂科数</th><th>学院</th><th>专业</th><th>风险等级</th></tr>
+<tr>
+            <td>pjxqzxbj967</td>
+            <td>50.1</td>
+            <td>69</td>
+            <td>人文学院</td>
+            <td>录音艺术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxsqxbj939</td>
+            <td>50.5</td>
+            <td>76</td>
+            <td>经济与管理学院</td>
+            <td>金融学</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqwbk777</td>
+            <td>51.5</td>
+            <td>86</td>
+            <td>计算机科学与技术学院</td>
+            <td>物联网工程</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxrqxbj905</td>
+            <td>51.9</td>
+            <td>69</td>
+            <td>数学与统计学院</td>
+            <td>信息与计算科学</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqwbk686</td>
+            <td>56.4</td>
+            <td>75</td>
+            <td>人工智能学院</td>
+            <td>智能科学与技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqwbj913</td>
+            <td>57.6</td>
+            <td>61</td>
+            <td>人工智能学院</td>
+            <td>人工智能</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxsqxbj760</td>
+            <td>57.8</td>
+            <td>63</td>
+            <td>经济与管理学院</td>
+            <td>人力资源管理</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbk501</td>
+            <td>58.0</td>
+            <td>72</td>
+            <td>空间科学与技术学院</td>
+            <td>探测制导与控制技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqwbk835</td>
+            <td>58.0</td>
+            <td>67</td>
+            <td>计算机科学与技术学院</td>
+            <td>物联网工程</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqwbj591</td>
+            <td>58.0</td>
+            <td>65</td>
+            <td>人工智能学院</td>
+            <td>智能科学与技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbk140</td>
+            <td>58.9</td>
+            <td>54</td>
+            <td>物理学院</td>
+            <td>电子信息科学与技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbk839</td>
+            <td>59.4</td>
+            <td>63</td>
+            <td>电子工程学院</td>
+            <td>信息对抗技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbk918</td>
+            <td>59.5</td>
+            <td>66</td>
+            <td>光电工程学院</td>
+            <td>光电信息科学与工程</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbj709</td>
+            <td>59.6</td>
+            <td>66</td>
+            <td>物理学院</td>
+            <td>电子信息科学与技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqwbj659</td>
+            <td>60.3</td>
+            <td>48</td>
+            <td>计算机科学与技术学院</td>
+            <td>数字媒体技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxsqxbj758</td>
+            <td>60.4</td>
+            <td>56</td>
+            <td>经济与管理学院</td>
+            <td>工商管理（理工类）</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqwbj116</td>
+            <td>60.6</td>
+            <td>63</td>
+            <td>人工智能学院</td>
+            <td>智能科学与技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbl712</td>
+            <td>60.6</td>
+            <td>52</td>
+            <td>空间科学与技术学院</td>
+            <td>探测制导与控制技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbj718</td>
+            <td>60.6</td>
+            <td>70</td>
+            <td>空间科学与技术学院</td>
+            <td>飞行器设计与工程</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqwbj380</td>
+            <td>60.6</td>
+            <td>54</td>
+            <td>计算机科学与技术学院</td>
+            <td>软件工程</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbk723</td>
+            <td>61.1</td>
+            <td>58</td>
+            <td>空间科学与技术学院</td>
+            <td>空间科学与技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbl763</td>
+            <td>61.1</td>
+            <td>59</td>
+            <td>空间科学与技术学院</td>
+            <td>探测制导与控制技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbj399</td>
+            <td>61.2</td>
+            <td>46</td>
+            <td>空间科学与技术学院</td>
+            <td>探测制导与控制技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqwbj701</td>
+            <td>61.5</td>
+            <td>54</td>
+            <td>计算机科学与技术学院</td>
+            <td>物联网工程</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxsqxbj921</td>
+            <td>61.5</td>
+            <td>55</td>
+            <td>经济与管理学院</td>
+            <td>市场营销</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbk732</td>
+            <td>62.0</td>
+            <td>54</td>
+            <td>光电工程学院</td>
+            <td>光电信息科学与工程</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbk916</td>
+            <td>62.2</td>
+            <td>67</td>
+            <td>光电工程学院</td>
+            <td>电子科学与技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqxbk373</td>
+            <td>62.9</td>
+            <td>54</td>
+            <td>物理学院</td>
+            <td>电子信息科学与技术</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqwbj692</td>
+            <td>63.1</td>
+            <td>38</td>
+            <td>人工智能学院</td>
+            <td>人工智能</td>
+            <td>高危</td>
+        </tr>
+<tr>
+            <td>pjxyqwbj397</td>
+            <td>63.2</td>
+            <td>45</td>
+            <td>网络与信息安全学院</td>
+            <td>网络空间安全</td>
+            <td>高危</td>
+        </tr>
+            </table>
+
+        </div>
+        
+        <div class="footer">
+            <p>基于多源数据的大学生行为分析与干预模型设计 | Generated by Streamlit</p>
+        </div>
+    </div>
+    
+    <script>
+
+        // 成绩分布图
+        var trace1 = {"bingroup": "x", "hovertemplate": "\u5e73\u5747\u6210\u7ee9=%{x}<br>count=%{y}<extra></extra>", "legendgroup": "", "marker": {"color": "#3366CC", "pattern": {"shape": ""}}, "name": "", "nbinsx": 20, "orientation": "v", "showlegend": false, "x": {"dtype": "f8", "bdata": "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"}, "xaxis": "x", "yaxis": "y", "type": "histogram"};
+        var layout1 = {
+            title: '成绩分布',
+            xaxis: {title: '平均成绩'},
+            yaxis: {title: '学生人数'},
+            height: 400
+        };
+        Plotly.newPlot('chart-score-dist', [trace1], layout1);
+        
+        // 性别分布图
+        var trace2 = {"domain": {"x": [0.0, 1.0], "y": [0.0, 1.0]}, "hovertemplate": "label=%{label}<br>value=%{value}<extra></extra>", "labels": ["\u7537", "\u5973"], "legendgroup": "", "name": "", "showlegend": true, "values": {"dtype": "i2", "bdata": "ZwddAg=="}, "type": "pie"};
+        var layout2 = {
+            title: '性别分布',
+            height: 400
+        };
+        Plotly.newPlot('chart-gender', [trace2], layout2);
+
+        // 学院分布图
+        var trace3 = {"hovertemplate": "\u5b66\u751f\u6570=%{x}<br>\u5b66\u9662=%{y}<br>\u5e73\u5747\u6210\u7ee9=%{marker.color}<extra></extra>", "legendgroup": "", "marker": {"color": {"dtype": "f8", "bdata": "afH8i9xpVUCRFoQNtq5VQKOBAM3gF1VAj9gRHUddVUBlDKVkjClWQDPV5a0pYFNAMY3nMGvIU0Do2OuW1s5VQGeibBigdFVAvF2jDc5JVUBmLJ4oEuRUQBcchetUwFVAvRcHEE+oVUAvccd7U2hWQCpcJwmMmFVAEaG/dlOvVUA="}, "coloraxis": "coloraxis", "pattern": {"shape": ""}}, "name": "", "orientation": "h", "showlegend": false, "textposition": "auto", "x": {"dtype": "i2", "bdata": "JAAkACYAKgAqADoAYAB0AIQAnQCjANMA7gBRAWIBvAE="}, "xaxis": "x", "y": ["\u5148\u8fdb\u6750\u6599\u4e0e\u7eb3\u7c73\u79d1\u6280\u5b66\u9662", "\u6570\u5b66\u4e0e\u7edf\u8ba1\u5b66\u9662", "\u751f\u547d\u79d1\u5b66\u6280\u672f\u5b66\u9662", "\u5916\u56fd\u8bed\u5b66\u9662", "\u4eba\u6587\u5b66\u9662", "\u7a7a\u95f4\u79d1\u5b66\u4e0e\u6280\u672f\u5b66\u9662", "\u7269\u7406\u5b66\u9662", "\u7ecf\u6d4e\u4e0e\u7ba1\u7406\u5b66\u9662", "\u7f51\u7edc\u4e0e\u4fe1\u606f\u5b89\u5168\u5b66\u9662", "\u4eba\u5de5\u667a\u80fd\u5b66\u9662", "\u5149\u7535\u5de5\u7a0b\u5b66\u9662", "\u5fae\u7535\u5b50\u5b66\u9662", "\u673a\u7535\u5de5\u7a0b\u5b66\u9662", "\u901a\u4fe1\u5de5\u7a0b\u5b66\u9662", "\u7535\u5b50\u5de5\u7a0b\u5b66\u9662", "\u8ba1\u7b97\u673a\u79d1\u5b66\u4e0e\u6280\u672f\u5b66\u9662"], "yaxis": "y", "type": "bar"};
+        var layout3 = {
+            title: '各学院学生分布与成绩',
+            xaxis: {title: '学生人数'},
+            yaxis: {title: '学院'},
+            height: 500
+        };
+        Plotly.newPlot('chart-college', [trace3], layout3);
+        
+        // 风险率图
+        var trace4 = {"hovertemplate": "\u98ce\u9669\u7387 (%)=%{x}<br>\u5b66\u9662=%{y}<br>color=%{marker.color}<extra></extra>", "legendgroup": "", "marker": {"color": {"dtype": "f8", "bdata": "OSUfp+Tj1D96nud5nufZP9QIyz2NsNw/Pc/zPM/z3D9hhc5ghc7gP5uTQFyoOeE/chzHcRzH4T8QheQCXm/jP1bDxQ9hkOM/baEBS3r54z/YUF5DeQ3lP1VVVVVVVeU/VVVVVVVV5T9CMqCeqVznPxphuacRlus/VVVVVVVV7j8="}, "coloraxis": "coloraxis", "pattern": {"shape": ""}}, "name": "", "orientation": "h", "showlegend": false, "textposition": "auto", "x": {"dtype": "f8", "bdata": "FVWQogpSQEDP8zzP8zxEQOaeRljuaUZA6Hme53meRkBosEJnsEJKQKLmJBAX6kpAchzHcRzHS0DpD4XkAl5OQDYBpaiXkU5AOowyFc81T0Apr6G8hnJQQKqqqqqqqlBAqqqqqqqqUEBEJ+2DZEBSQNzTCMs9jVVAqqqqqqqyV0A="}, "xaxis": "x", "y": ["\u901a\u4fe1\u5de5\u7a0b\u5b66\u9662", "\u4eba\u6587\u5b66\u9662", "\u7ecf\u6d4e\u4e0e\u7ba1\u7406\u5b66\u9662", "\u5916\u56fd\u8bed\u5b66\u9662", "\u673a\u7535\u5de5\u7a0b\u5b66\u9662", "\u8ba1\u7b97\u673a\u79d1\u5b66\u4e0e\u6280\u672f\u5b66\u9662", "\u5148\u8fdb\u6750\u6599\u4e0e\u7eb3\u7c73\u79d1\u6280\u5b66\u9662", "\u7535\u5b50\u5de5\u7a0b\u5b66\u9662", "\u5fae\u7535\u5b50\u5b66\u9662", "\u4eba\u5de5\u667a\u80fd\u5b66\u9662", "\u751f\u547d\u79d1\u5b66\u6280\u672f\u5b66\u9662", "\u6570\u5b66\u4e0e\u7edf\u8ba1\u5b66\u9662", "\u7f51\u7edc\u4e0e\u4fe1\u606f\u5b89\u5168\u5b66\u9662", "\u5149\u7535\u5de5\u7a0b\u5b66\u9662", "\u7a7a\u95f4\u79d1\u5b66\u4e0e\u6280\u672f\u5b66\u9662", "\u7269\u7406\u5b66\u9662"], "yaxis": "y", "type": "bar"};
+        var layout4 = {
+            title: '各学院风险率',
+            xaxis: {title: '风险率 (%)'},
+            yaxis: {title: '学院'},
+            height: 400
+        };
+        Plotly.newPlot('chart-risk', [trace4], layout4);
+
+    </script>
+</body>
+</html>
